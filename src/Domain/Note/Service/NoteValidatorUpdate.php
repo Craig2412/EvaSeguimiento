@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Domain\Requirements\Service;
+namespace App\Domain\Note\Service;
 
-use App\Domain\Requirements\Repository\RequirementsRepository;
+use App\Domain\Note\Repository\NoteRepository;
 use App\Factory\ConstraintFactory;
 use DomainException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Validation;
 
-final class RequirementsValidatorUpdate
+final class NoteValidatorUpdate
 {
-    private RequirementsRepository $repository;
+    private NoteRepository $repository;
 
-    public function __construct(RequirementsRepository $repository)
+    public function __construct(NoteRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function validateRequirementsUpdate(int $requirementsId, array $data): void
+    public function validateNoteUpdate(int $noteId, array $data): void
     {
-        if (!$this->repository->existsRequirementsId($requirementsId)) {
-            throw new DomainException(sprintf('Requirements not found: %s', $requirementsId));
+        if (!$this->repository->existsNoteId($noteId)) {
+            throw new DomainException(sprintf('Note not found: %s', $noteId));
         }
 
-        $this->validateRequirements($data);
+        $this->validateNote($data);
     }
 
-    public function validateRequirements(array $data): void
+    public function validateNote(array $data): void
     {
         $validator = Validation::createValidator();
         $violations = $validator->validate($data, $this->createConstraints());
@@ -43,12 +43,11 @@ final class RequirementsValidatorUpdate
 
         return $constraint->collection(
             [
-                'id_status' => $constraint->required(
+                'note' => $constraint->required(
                     [
                         $constraint->notBlank(),
-                        $constraint->length(1,1),
-                    ]
-                )
+                        $constraint->length(10,100),
+                    ])
             ]
         );
     }

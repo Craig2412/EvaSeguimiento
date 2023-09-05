@@ -100,11 +100,22 @@ return function (App $app) {
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
             $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
             $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed
-            $app->put('/{task_id}', \App\Action\Task\TaskUpdaterAction::class);//
+            $app->put('/{task_id}', \App\Action\Task\TaskUpdaterAction::class);//completed
             $app->delete ('/{task_id}', \App\Action\Task\TaskDeleterAction::class);//completed
         }
     );
 
+   //Notes
+    $app->group(
+        '/notes',
+        function (RouteCollectorProxy $app) { 
+            $app->get('/unique/{id_note}', \App\Action\Note\NoteReaderAction::class);//completed
+            $app->get('/{id_task}/{nro_pag}/{cant_registros}', \App\Action\Note\NoteFinderAction::class);//completed
+            $app->post('', \App\Action\Note\NoteCreatorAction::class);//completed
+            $app->put('/{note_id}', \App\Action\Note\NoteUpdaterAction::class);//completed
+            $app->delete ('/{note_id}', \App\Action\Note\NoteDeleterAction::class);//completed
+        }
+    );
 
     // API
     $app->group(

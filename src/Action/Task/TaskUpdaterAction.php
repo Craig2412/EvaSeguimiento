@@ -25,7 +25,7 @@ final class TaskUpdaterAction
         array $args
     ): ResponseInterface {
         // Extract the form data from the request body
-        $taskId = (int)$args['id_requirement'];
+        $taskId = (int)$args['task_id'];
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result

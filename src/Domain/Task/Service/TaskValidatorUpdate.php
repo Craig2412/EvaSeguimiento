@@ -43,11 +43,61 @@ final class TaskValidatorUpdate
 
         return $constraint->collection(
             [
+                'tittle' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(10,50),
+                    ]),
+                'description' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(null, 150)
+                    ]),
                 'id_status' => $constraint->required(
                     [
                         $constraint->notBlank(),
-                        $constraint->length(1,1),
+                        $constraint->length(1),
+                        $constraint->positive()
                     ]
+                ),
+                'id_area' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(1),
+                        $constraint->positive()
+                    ]
+                ),
+                'id_responsable' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(1,3),
+                        $constraint->positive()
+                    ]
+                ),
+                'id_type_task' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(1,3),
+                        $constraint->positive()
+                    ]                
+                ),
+                'initial_date' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(10,19)
+                    ]                
+                ),
+                'estimated_date' => $constraint->required(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(10,19)
+                    ]                
+                ),
+                'due_date' => $constraint->optional(
+                    [
+                        $constraint->notBlank(),
+                        $constraint->length(10,19),
+                    ]                
                 )
             ]
         );

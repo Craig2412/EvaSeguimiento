@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Action\Requirements;
+namespace App\Action\Note;
 
-use App\Domain\Requirements\Service\RequirementsUpdater;
+use App\Domain\Note\Service\NoteUpdater;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class RequirementsUpdaterAction
+final class NoteUpdaterAction
 {
-    private RequirementsUpdater $requirementsUpdater;
+    private NoteUpdater $noteUpdater;
 
     private JsonRenderer $renderer;
 
-    public function __construct(RequirementsUpdater $requirementsUpdater, JsonRenderer $jsonRenderer)
+    public function __construct(NoteUpdater $noteUpdater, JsonRenderer $jsonRenderer)
     {
-        $this->requirementsUpdater = $requirementsUpdater;
+        $this->noteUpdater = $noteUpdater;
         $this->renderer = $jsonRenderer;
     }
 
@@ -25,11 +25,11 @@ final class RequirementsUpdaterAction
         array $args
     ): ResponseInterface {
         // Extract the form data from the request body
-        $requirementsId = (int)$args['id_requirement'];
+        $noteId = (int)$args['note_id'];
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $new_date = $this->requirementsUpdater->updateRequirements($requirementsId, $data);
+        $new_date = $this->noteUpdater->updateNote($noteId, $data);
 
         // Build the HTTP response
         return $this->renderer->json($response,['datos nuevos' => $new_date]);

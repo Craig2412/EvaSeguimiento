@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Action\Requirements;
+namespace App\Action\Note;
 
-use App\Domain\Requirements\Service\RequirementsCreator;
+use App\Domain\Note\Service\NoteCreator;
 use App\Renderer\JsonRenderer;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class RequirementsCreatorAction
+final class NoteCreatorAction
 {
     private JsonRenderer $renderer;
 
-    private RequirementsCreator $requirementsCreator;
+    private NoteCreator $noteCreator;
 
-    public function __construct(RequirementsCreator $requirementsCreator, JsonRenderer $renderer)
+    public function __construct(NoteCreator $noteCreator, JsonRenderer $renderer)
     {
-        $this->requirementsCreator = $requirementsCreator;
+        $this->noteCreator = $noteCreator;
         $this->renderer = $renderer;
     }
 
@@ -26,11 +26,11 @@ final class RequirementsCreatorAction
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $requirementsId = $this->requirementsCreator->createRequirements($data);
+        $noteId = $this->noteCreator->createNote($data);
 
         // Build the HTTP response
         return $this->renderer
-            ->json($response, ['requirements_id' => $requirementsId])
+            ->json($response, ['note_id' => $noteId])
             ->withStatus(StatusCodeInterface::STATUS_CREATED);
     }
 }
