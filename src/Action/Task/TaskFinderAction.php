@@ -41,11 +41,15 @@ final class TaskFinderAction
         if (isset($args['params'])) {
             $clase_busqueda = New argValidator;
             $params = explode('/', $args['params']);
-            $params = json_decode($params[0]);          
-            $parametros = $clase_busqueda->whereGenerate($params,'appointments');          
+            $params = json_decode($params[0], true);    
+
+            $parametros = $clase_busqueda->whereGenerate($params,'tasks');
+           
+
         }else {
             $parametros = null;
         }
+
 
         $tasks = $this->tasksFinder->findTask($nro_pag,$parametros,$cant_registros);
     //Fin Paginador
@@ -89,14 +93,8 @@ final class TaskFinderAction
 }
 /*
 
-En el código que analizamos anteriormente, la variable $args debe tener un parámetro llamado 'params' que contenga un valor específico. Este valor debe ser una cadena de texto en formato JSON. Por lo tanto, para enviar el valor adecuado en la variable $args['params'], debes asegurarte de que sea una cadena de texto en formato JSON válido. 
- 
-Aquí tienes un ejemplo de cómo podrías enviar el valor en la variable $args['params']: 
- 
-$args['params'] = '{"format_appointment": "some_value", "name": "some_name", "surname": "some_surname"}'; 
- 
-En este ejemplo, se utiliza un objeto JSON con las claves 'format_appointment', 'name' y 'surname', y se les asignan algunos valores. Puedes ajustar los valores y las claves según tus necesidades. 
- 
-Recuerda que este es solo un ejemplo y debes adaptarlo a tu caso específico, asegurándote de que el valor en la variable $args['params'] sea una cadena de texto en formato JSON válido.
 
+EJEMPLO DEL STRING QUE SE DEBE ENVIAR POR LOS PARAMETROS CON FORMATO JSON:
+    {"area": "some_value", "status": "some_name", "type_tasks": "some_surname"}
+ 
 */

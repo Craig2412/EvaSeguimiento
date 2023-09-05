@@ -14,42 +14,31 @@ final class argValidator
         foreach ($params as $filas => $value) {
 
             switch ($filas) {
-                case 'format_appointment':
-                    $filas = 'format_appointment.format_appointment';
+                case 'area':
+                    $filas = 'areas.area';
                     $value = strtoupper($value);
                     $where = [...$where,$filas => "$value"];   
-                    break;
-                
-                case 'name':
-                    $filas = 'users.name';
-                    $value = strtoupper($value);
-                    $where = [...$where,$filas => "$value"];   
-                    break;
-                
-                case 'surname':
-                    $filas = 'users.surname';
-                    $value = strtoupper($value);
-                    $where = [...$where,$filas => "$value"];
                     break;
                 
                 case 'status':
-                    $filas = 'state.status';
+                    $filas = 'status.state';
+                    $value = strtoupper($value);
+                    $where = [...$where,$filas => "$value"];   
+                    break;
+                
+                case 'type_tasks':
+                    $filas = 'type_tasks.tipo_tarea';
                     $value = strtoupper($value);
                     $where = [...$where,$filas => "$value"];
                     break;
-
-                case 'format_appointments':
-                    $filas = 'format_appointment.format_appointment';
-                    $value = strtoupper($value);
-                    $where = [...$where,$filas => "$value"];
-                    break;
-
+                
+            /*
                 case 'fecha_inicial':
                     $filas = "'".$table_name.'.created';
                     $value = strtoupper($value);
-                    $where = [...$where,$filas => "$value"];;
+                    $where = [...$where,$filas => "$value"];
                     break;
-
+            */
                 
                 default:
                     break;
