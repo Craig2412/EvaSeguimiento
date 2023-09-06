@@ -49,10 +49,11 @@ final class TaskFinder
             $task->due_date = $taskRow['due_date'];
             $task->created = $taskRow['created'];
             $task->updated = $taskRow['updated'];
+            
 
             $result->task[] = $task;
         }
-
+        
         return $result;
     }
 }

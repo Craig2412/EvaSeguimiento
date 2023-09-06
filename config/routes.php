@@ -4,12 +4,11 @@
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
-
-
 return function (App $app) {
     // Redirect to Swagger documentation
     $app->get('/', \App\Action\Home\HomeAction::class)->setName('home');
-    $app->get('/dashboard', \App\Action\Home\HomeAction::class)->setName('dashboard');
+    $app->get('/dashboard', \App\Action\Home\TaskbyStatusFinderAction::class)->setName('dashboard');
+
     $app->options('/{routes:.+}', function ($request, $response, $args) {
         return $response;
     });
@@ -97,6 +96,8 @@ return function (App $app) {
     $app->group(
         '/tasks',
         function (RouteCollectorProxy $app) { 
+            $app->get('/byStatus', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // Devuelve la cantidad de tasks por status
+            $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
             $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
             $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed

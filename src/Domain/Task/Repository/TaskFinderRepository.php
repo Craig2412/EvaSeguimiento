@@ -44,7 +44,8 @@ final class TaskFinderRepository
                 'tasks.estimated_date',
                 'tasks.due_date',
                 'tasks.created',
-                'tasks.updated'
+                'tasks.updated' 
+                
             ]
         )
 
@@ -52,16 +53,17 @@ final class TaskFinderRepository
         ->leftjoin(['areas'=>'areas'], 'areas.id = tasks.id_area')
         ->leftjoin(['type_tasks'=>'type_tasks'], 'type_tasks.id = tasks.id_type_task')
         ->leftjoin(['responsibles'=>'responsibles'], 'responsibles.id = tasks.id_responsable');
+
         
+
         //Paginador
         if (!empty($where)) {
          $query->where($where);    
         }
-        
         $query->offset([$offset]);
         $query->limit([$limit]);
+        //var_dump($query->execute()->fetchAll('assoc'));
         //Fin paginador
-
 
         return $query->execute()->fetchAll('assoc') ?: [];
     }
