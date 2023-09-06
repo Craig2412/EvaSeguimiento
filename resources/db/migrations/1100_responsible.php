@@ -10,7 +10,7 @@ final class Responsible extends AbstractMigration
         $responsibles = $this->table('responsibles');
         $responsibles   ->addColumn('nombre', 'string', ['limit' => 100])
                         ->addColumn('direccion', 'string', ['limit' => 40])
-                        ->addColumn('gmail', 'string' , ['limit' => 15])
+                        ->addColumn('gmail', 'string' , ['limit' => 50])
                         ->addColumn('id_charge','integer' , ['null' => false, 'signed' => false, 'default'=> 1])
 
                         ->addColumn('created', 'datetime')
