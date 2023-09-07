@@ -15,11 +15,10 @@ final class TaskbyStatusFinder
         $this->repository = $repository;
     }
 
-    public function findTaskbyStatus(int $type_taskId): TaskbyStatusFinderResult
+    public function findTaskbyStatus(int $busquedaId, int $value): TaskbyStatusFinderResult
     {
-        
         // Input validation
-        $taskbyStatus = $this->repository->findTaskbyStatus($type_taskId);
+        $taskbyStatus = $this->repository->findTaskbyStatus($busquedaId,$value);
 
         return $this->createResult($taskbyStatus);
     }

@@ -49,7 +49,7 @@ final class ResponsibleReader
         $result->id_charge = $responsibleRow['id_charge'];
         $result->charge = $responsibleRow['charge'];
         $result->created = $responsibleRow['created'];
-        $result->updated = $responsibleRow['charge'];
+        $result->updated = $responsibleRow['updated'];
         
         return $result;
     }

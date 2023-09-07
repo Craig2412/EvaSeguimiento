@@ -13,7 +13,7 @@ final class TaskbyStatusFinderRepository
         $this->queryFactory = $queryFactory;
     }
 
-    public function findTaskbyStatus(int $type_taskId): array
+    public function findTaskbyStatus(int $busquedaId, int $value): array
     {
         
         $query = $this->queryFactory->newSelect('tasks');
@@ -23,8 +23,16 @@ final class TaskbyStatusFinderRepository
         ])
         ->leftJoin('status', 'status.id = tasks.id_status')
         ->group('tasks.id_status');
+
+        if ($value === 1) {
+            //Se genera la consulta por los tipos de tareas
+            $query->where(['tasks.id_type_task' => $busquedaId]);
+        }else {
+            //Se genera la consulta por direcciones de linea
+            $query->where(['tasks.id_area' => $busquedaId]);
+
+        }
        
-        $query->where(['tasks.id_type_task' => $type_taskId]);
         return $query->execute()->fetchAll('assoc') ?: [];
     }
 }

@@ -96,7 +96,8 @@ return function (App $app) {
     $app->group(
         '/tasks',
         function (RouteCollectorProxy $app) { 
-            $app->get('/byStatus/{id_type_task}', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // Devuelve la cantidad de tasks por status
+            // Devuelve la cantidad de tasks por status segun el tipo de tarea o la direcciones de linea 
+            $app->get('/byStatus/{value}/{id_busqueda}', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // ($value = 1 [para tipos de tarea] 2 [para busqueda por areas]) (id_busqueda = 1-20 [para tipos de tareas] 1-3 [para las areas])
             $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
             $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//completed
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
@@ -128,6 +129,18 @@ return function (App $app) {
             $app->post('', \App\Action\Responsible\ResponsibleCreatorAction::class);//completed
             $app->put('/{responsible_id}', \App\Action\Responsible\ResponsibleUpdaterAction::class);//completed
             $app->delete('/{responsible_id}', \App\Action\Responsible\ResponsibleDeleterAction::class);//completed
+        }
+    );
+    
+     // Usuarios
+     $app->group(
+        '/usuarios',
+        function (RouteCollectorProxy $app) {
+            $app->get('', \App\Action\Usuario\UsuarioFinderAction::class);//completed
+            $app->get('/{usuario_id}', \App\Action\Usuario\UsuarioReaderAction::class);//completed
+            $app->post('', \App\Action\Usuario\UsuarioCreatorAction::class);//
+            $app->put('/{usuario_id}', \App\Action\Usuario\UsuarioUpdaterAction::class);//
+            $app->delete('/{usuario_id}', \App\Action\Usuario\UsuarioDeleterAction::class);//
         }
     );
 

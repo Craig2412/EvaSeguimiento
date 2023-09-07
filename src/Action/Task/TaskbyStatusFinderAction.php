@@ -24,9 +24,10 @@ final class TaskbyStatusFinderAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $type_taskId = (int)$args['id_type_task'];
-
-        $taskbyStatuss = $this->taskbyStatussFinder->findTaskbyStatus($type_taskId);
+        $value = (int)$args['value'];
+        $busquedaId = (int)$args['id_busqueda']; 
+       
+        $taskbyStatuss = $this->taskbyStatussFinder->findTaskbyStatus($busquedaId,$value);
   
 
         // Transform result and render to json
