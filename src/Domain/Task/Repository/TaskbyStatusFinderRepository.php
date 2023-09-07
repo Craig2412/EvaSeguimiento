@@ -13,7 +13,7 @@ final class TaskbyStatusFinderRepository
         $this->queryFactory = $queryFactory;
     }
 
-    public function findTaskbyStatus(): array
+    public function findTaskbyStatus(int $type_taskId): array
     {
         
         $query = $this->queryFactory->newSelect('tasks');
@@ -24,6 +24,7 @@ final class TaskbyStatusFinderRepository
         ->leftJoin('status', 'status.id = tasks.id_status')
         ->group('tasks.id_status');
        
+        $query->where(['tasks.id_type_task' => $type_taskId]);
         return $query->execute()->fetchAll('assoc') ?: [];
     }
 }

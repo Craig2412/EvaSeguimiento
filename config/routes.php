@@ -96,9 +96,9 @@ return function (App $app) {
     $app->group(
         '/tasks',
         function (RouteCollectorProxy $app) { 
-            $app->get('/byStatus', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // Devuelve la cantidad de tasks por status
+            $app->get('/byStatus/{id_type_task}', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // Devuelve la cantidad de tasks por status
             $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
-            $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//
+            $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//completed
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
             $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
             $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed

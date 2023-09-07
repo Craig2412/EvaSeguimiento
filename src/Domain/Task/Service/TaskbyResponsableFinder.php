@@ -41,8 +41,8 @@ final class TaskbyResponsableFinder
             $taskbyResponsable->id_responsable = $taskbyResponsableRow['id_responsable'];
             $taskbyResponsable->nombre = $taskbyResponsableRow['nombre'];
             $taskbyResponsable->direccion = $taskbyResponsableRow['direccion'];
-            $taskbyResponsable->id_type_taskbyResponsable = $taskbyResponsableRow['id_type_taskbyResponsable'];
-            $taskbyResponsable->type_taskbyResponsable = $taskbyResponsableRow['tipo_tarea'];
+            $taskbyResponsable->id_type_task = $taskbyResponsableRow['id_type_task'];
+            $taskbyResponsable->type_task = $taskbyResponsableRow['tipo_tarea'];
 
             $taskbyResponsable->initial_date = $taskbyResponsableRow['initial_date'];
             $taskbyResponsable->estimated_date = $taskbyResponsableRow['estimated_date'];

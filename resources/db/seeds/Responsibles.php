@@ -130,7 +130,7 @@ class Responsibles extends AbstractSeed
                 'updated' => null
             ],[
                 'id'    => 16,
-                'nombre'    => 'Luis Villegas',
+                'nombre'    => 'Hendrick Perdomo',
                 'direccion' => 'DIRECCION GENERAL',
                 'gmail' => '015@gmail.com',
                 'id_charge' => 1,
