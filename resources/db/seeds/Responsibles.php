@@ -107,7 +107,7 @@ class Responsibles extends AbstractSeed
             ],[
                 'id'    => 13,
                 'nombre'    => 'Kerina Guerrero',
-                'direccion' => 'Asesoria Juridica',
+                'direccion' => 'ASESORIA JURIDICA',
                 'gmail' => '012@gmail.com',
                 'id_charge' => 1,
                 'created' => date('Y-m-d H:i:s'),
