@@ -56,6 +56,10 @@ final class TaskCalendarFinderAction
             $taskCalendars[] = [
                 'id' => $taskCalendar->id,
                 'title' => $taskCalendar->title,
+                'start' => $taskCalendar->initial_date,
+                'end' => $taskCalendar->estimated_date,
+
+
                 'description' => $taskCalendar->description,//
                 'id_status' => $taskCalendar->id_status,
                 'status' => $taskCalendar->status,
@@ -66,8 +70,7 @@ final class TaskCalendarFinderAction
                 'direccion' => $taskCalendar->direccion,
                 'id_type_taskCalendar' => $taskCalendar->id_type_taskCalendar,
                 'type_taskCalendar' => $taskCalendar->type_taskCalendar,
-                'initial_date' => $taskCalendar->initial_date,
-                'estimated_date' => $taskCalendar->estimated_date,
+                
                 'due_date' => $taskCalendar->due_date,
                 'created' => $taskCalendar->created,
                 'updated' => $taskCalendar->updated
