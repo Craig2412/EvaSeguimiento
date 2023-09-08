@@ -100,6 +100,7 @@ return function (App $app) {
             $app->get('/byStatus/{value}/{id_busqueda}', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // ($value = 1 [para tipos de tarea] 2 [para busqueda por areas]) (id_busqueda = 1-20 [para tipos de tareas] 1-3 [para las areas])
             $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
             $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//completed
+            $app->get('/byCalendar/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Task\TaskCalendarFinderAction::class);//
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
             $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
             $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed

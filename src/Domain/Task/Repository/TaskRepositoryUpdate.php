@@ -28,7 +28,7 @@ final class TaskRepositoryUpdate
     private function toRow(array $task): array
     {   
         return [
-            'title' => strtoupper($task['tittle']),
+            'title' => strtoupper($task['title']),
             'description' => strtoupper($task['description']),
             'id_status' => $task['id_status'],
             'id_area' => $task['id_area'],

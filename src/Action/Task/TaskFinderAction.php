@@ -50,7 +50,6 @@ final class TaskFinderAction
             $parametros = null;
         }
 
-
         $tasks = $this->tasksFinder->findTask($nro_pag,$parametros,$cant_registros);
     //Fin Paginador
     //$nro_pag,$parametros,$cant_registros

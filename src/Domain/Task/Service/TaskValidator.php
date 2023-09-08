@@ -43,7 +43,7 @@ final class TaskValidator
 
         return $constraint->collection(
             [
-                'tittle' => $constraint->required(
+                'title' => $constraint->required(
                     [
                         $constraint->notBlank(),
                         $constraint->length(10,50),
