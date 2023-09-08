@@ -56,8 +56,8 @@ final class TaskCalendarFinderAction
             $taskCalendars[] = [
                 'id' => $taskCalendar->id,
                 'title' => $taskCalendar->title,
-                'start' => $taskCalendar->estimated_date,
-                'end' => $taskCalendar->estimated_date,
+                'start' => date("d-m-Y", strtotime($taskCalendar->estimated_date)),
+                'end' => date("d-m-Y", strtotime($taskCalendar->estimated_date)),
                 //date("d-m-Y", strtotime($taskCalendar->initial_date));
                 //date("d-m-Y", strtotime($taskCalendar->estimated_date));
 
