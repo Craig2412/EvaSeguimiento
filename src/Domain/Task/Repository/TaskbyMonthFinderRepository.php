@@ -25,6 +25,25 @@ final class TaskbyMonthFinderRepository
         ->where(['YEAR(tasks.due_date)' => $year])
         ->group(['month']);
 
-    return $query->execute()->fetchAll('assoc') ?: [];
+        $results = $query->execute()->fetchAll('assoc');
+        
+        $months = range(1, 12); // Genera un array con los números de mes del 1 al 12
+        
+        $formattedResults = [];
+        
+        foreach ($months as $month) {
+            $formattedResults[] = [
+                'month' => $month,
+                'total' => 0
+            ];
+        }
+        
+        foreach ($results as $result) {
+            $formattedResults[$result['month'] - 1] = $result;
+        }
+        
+        //var_dump($formattedResults);
+        
+        return $formattedResults;
     }
 }
