@@ -131,7 +131,7 @@ class TypeTasks extends AbstractSeed
             ],
             [
                 'id'    => 18,
-                'tipo_tarea'  => 'ASESORIA JURIDICA',
+                'tipo_tarea'  => 'MESA ASESORIA JURIDICA',
                 'descripcion' => null,
                 'id_area' => '1',
                 'created' => date('Y-m-d H:i:s'),

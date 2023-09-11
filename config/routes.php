@@ -102,7 +102,7 @@ return function (App $app) {
             $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
             $app->get('/byResponsablesAll', \App\Action\Task\TaskbyResponsableAllFinderAction::class);//completed
             $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//completed
-            $app->get('/byCalendar/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Task\TaskCalendarFinderAction::class);//
+            $app->get('/byCalendar/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Task\TaskCalendarFinderAction::class);//completed
             $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
             $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
             $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed
@@ -118,6 +118,7 @@ return function (App $app) {
             $app->get('/unique/{id_note}', \App\Action\Note\NoteReaderAction::class);//completed
             $app->get('/{id_task}/{nro_pag}/{cant_registros}', \App\Action\Note\NoteFinderAction::class);//completed
             $app->post('', \App\Action\Note\NoteCreatorAction::class);//completed
+            $app->post('/file', \App\Action\Note\NoteFileCreatorAction::class);//
             $app->put('/{note_id}', \App\Action\Note\NoteUpdaterAction::class);//completed
             $app->delete ('/{note_id}', \App\Action\Note\NoteDeleterAction::class);//completed
         }
