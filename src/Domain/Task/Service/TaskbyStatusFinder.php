@@ -6,6 +6,21 @@ use App\Domain\Task\Data\TaskbyStatusFinderItem;
 use App\Domain\Task\Data\TaskbyStatusFinderResult;
 use App\Domain\Task\Repository\TaskbyStatusFinderRepository;
 
+function obtenerNombreStatus($numeroStatus) {
+    $meses = [
+        1 => 'POR INICIAR',
+        2 => 'EN PROCESO',
+        3 => 'CULMINADO',
+        4 => 'DETENIDO'
+    ];
+
+    if (isset($meses[$numeroStatus])) {
+        return $meses[$numeroStatus];
+    } else {
+        return 'Tareas sin culminar';
+    }
+}
+
 final class TaskbyStatusFinder
 {
     private TaskbyStatusFinderRepository $repository;
@@ -30,7 +45,7 @@ final class TaskbyStatusFinder
         foreach ($taskbyStatusRows as $taskbyStatusRow) {
             $taskbyStatus = new TaskbyStatusFinderItem();
            
-            $taskbyStatus->state = $taskbyStatusRow['state'];
+            $taskbyStatus->state = obtenerNombreStatus($taskbyStatusRow['id_status']);
             $taskbyStatus->total = $taskbyStatusRow['total'];
             
 

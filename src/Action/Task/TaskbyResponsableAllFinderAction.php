@@ -38,8 +38,8 @@ final class TaskbyResponsableAllFinderAction
         
         foreach ($result->taskbyResponsable as $taskbyResponsable) {
             $taskbyResponsables[] = [
-                'direccion' => $taskbyResponsable->direccion,
-                'total' => $taskbyResponsable->total,
+                'title' => $taskbyResponsable->direccion,
+                'totales' => $taskbyResponsable->total,
                 'completados' => $taskbyResponsable->completado,
                 'resto' => $taskbyResponsable->total - $taskbyResponsable->completado           
             ];

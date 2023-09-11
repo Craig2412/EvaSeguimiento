@@ -18,11 +18,9 @@ final class TaskbyStatusFinderRepository
         
         $query = $this->queryFactory->newSelect('tasks');
         $query->select([
-            'total' => $query->func()->count('*'),
-            'status.state'
-        ])
-        ->leftJoin('status', 'status.id = tasks.id_status')
-        ->group('tasks.id_status');
+            'tasks.id_status',
+            'total' => $query->func()->count('*')
+        ]);
 
         if ($value === 1) {
             //Se genera la consulta por los tipos de tareas
@@ -32,7 +30,25 @@ final class TaskbyStatusFinderRepository
             $query->where(['tasks.id_area' => $busquedaId]);
 
         }
-       
-        return $query->execute()->fetchAll('assoc') ?: [];
+        $query->group('tasks.id_status');
+
+
+        $results = $query->execute()->fetchAll('assoc');
+        
+        $statuss = range(1, 4); 
+        
+        $formattedResults = [];
+        
+        foreach ($statuss as $status) {
+            $formattedResults[] = [
+                'id_status' => $status,
+                'total' => 0
+            ];
+        }
+        
+        foreach ($results as $result) {
+            $formattedResults[$result['id_status'] - 1] = $result;
+        }
+        return $formattedResults ?: [];
     }
 }

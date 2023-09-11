@@ -40,8 +40,8 @@ final class TaskbyMonthFinderAction
 
         foreach ($result->taskbyMonth as $taskbyMonth) {
             $taskbyMonths[] = [
-                'month' => strtoupper($taskbyMonth->month),
-                'total' => $taskbyMonth->total,
+                strtoupper($taskbyMonth->month),
+                $taskbyMonth->total,
             ];
         }
 

@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Action\Task;
+namespace App\Action\Requirements;
 
-use App\Domain\Task\Service\TaskUpdater;
+use App\Domain\Requirements\Service\RequirementsUpdater;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class TaskUpdaterAction
+final class RequirementsUpdaterAction
 {
-    private TaskUpdater $taskUpdater;
+    private RequirementsUpdater $requirementsUpdater;
 
     private JsonRenderer $renderer;
 
-    public function __construct(TaskUpdater $taskUpdater, JsonRenderer $jsonRenderer)
+    public function __construct(RequirementsUpdater $requirementsUpdater, JsonRenderer $jsonRenderer)
     {
-        $this->taskUpdater = $taskUpdater;
+        $this->requirementsUpdater = $requirementsUpdater;
         $this->renderer = $jsonRenderer;
     }
 
@@ -25,13 +25,13 @@ final class TaskUpdaterAction
         array $args
     ): ResponseInterface {
         // Extract the form data from the request body
-        $taskId = (int)$args['task_id'];
+        $requirementsId = (int)$args['id_requirement'];
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $new_date = $this->taskUpdater->updateTask($taskId, $data);
+        $new_date = $this->requirementsUpdater->updateRequirements($requirementsId, $data);
 
         // Build the HTTP response
-        return $this->renderer->json($response,['update' => $new_date]);
+        return $this->renderer->json($response,['datos nuevos' => $new_date]);
     }
 }

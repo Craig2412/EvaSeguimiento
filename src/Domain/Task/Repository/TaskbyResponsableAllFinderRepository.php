@@ -20,10 +20,10 @@ final class TaskbyResponsableAllFinderRepository
         $query->select(
             [
                 'responsibles.direccion',               
-                'COUNT(*) as total'
+                'IF(sum(tasks.id) is null, 0,COUNT(*)) as total'
             ])
-            ->leftjoin(['responsibles'=>'responsibles'], 'responsibles.id = tasks.id_responsable')
-            ->group('tasks.id_responsable'); 
+            ->rightjoin(['responsibles'=>'responsibles'], 'responsibles.id = tasks.id_responsable')
+            ->group('responsibles.id'); 
         $consulta = $query->execute()->fetchAll('assoc');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         $query2 = $this->queryFactory->newSelect('tasks');
@@ -31,10 +31,10 @@ final class TaskbyResponsableAllFinderRepository
         $query2->select(
             [
                 'responsibles.direccion',               
-                'COUNT(*) as total2'
+                'IF(sum(tasks.id) is null, 0,COUNT(*)) as total2'
             ])
-            ->leftjoin(['responsibles'=>'responsibles'], 'responsibles.id = tasks.id_responsable')
-            ->group('tasks.id_responsable');
+            ->rightjoin(['responsibles'=>'responsibles'], 'responsibles.id = tasks.id_responsable')
+            ->group('responsibles.id');
         $query2->where(['tasks.id_status' => 3]);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
