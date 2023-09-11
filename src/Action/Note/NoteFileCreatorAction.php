@@ -8,7 +8,7 @@ use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-function guardarArchivo($archivo,$noteId) {
+function guardarArchivo($archivo) {
     $rutaDestino = __DIR__.'./../../../resources/notesFiles/';
     $nombreArchivo = uniqid() . '_' . $archivo['name'];
     $rutaCompleta = $rutaDestino . $nombreArchivo;
@@ -44,7 +44,7 @@ final class NoteFileCreatorAction
 
          if (isset($_FILES['file'])) {
             $archivo = $_FILES['file'];
-            $resultado = guardarArchivo($archivo,$data["id_note"]);
+            $resultado = guardarArchivo($archivo);
             if ($resultado !== false) {
                 $data["nombre"] = $resultado["nombre"];
                 $data["type_file"] = $resultado["type_file"];
