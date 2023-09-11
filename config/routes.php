@@ -118,7 +118,7 @@ return function (App $app) {
             $app->get('/unique/{id_note}', \App\Action\Note\NoteReaderAction::class);//completed
             $app->get('/{id_task}/{nro_pag}/{cant_registros}', \App\Action\Note\NoteFinderAction::class);//completed
             $app->post('', \App\Action\Note\NoteCreatorAction::class);//completed
-            $app->post('/file', \App\Action\Note\NoteFileCreatorAction::class);//
+            $app->post('/file', \App\Action\Note\NoteFileCreatorAction::class);//completed
             $app->put('/{note_id}', \App\Action\Note\NoteUpdaterAction::class);//completed
             $app->delete ('/{note_id}', \App\Action\Note\NoteDeleterAction::class);//completed
         }
