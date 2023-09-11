@@ -8,6 +8,23 @@ use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+function guardarArchivo($archivo,$noteId) {
+    $rutaDestino = __DIR__.'./../../../resources/notesFiles/';
+    $nombreArchivo = uniqid() . '_' . $archivo['name'];
+    $rutaCompleta = $rutaDestino . $nombreArchivo;
+    $tipoArchivo = $_FILES['file']['type'];
+
+    if (move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
+        return [
+                "nombre" => $nombreArchivo,
+                "src" => $rutaCompleta, 
+                "type_file" => $tipoArchivo
+               ];
+    } else {
+        return false;
+    }
+}
+
 final class NoteFileCreatorAction
 {
     private JsonRenderer $renderer;
@@ -22,25 +39,28 @@ final class NoteFileCreatorAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        // Obtiene el archivo de la solicitud
-        $uploadedFile = $request->getUploadedFiles()['file'];
+         // Extract the form data from the request body
+         $data = (array)$request->getParsedBody();
 
-        if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
-            // Genera un nombre único para el archivo
-            var_dump('holi');
-            $filename = uniqid() . '_' . $uploadedFile->getClientFilename();
-            
-            // Mueve el archivo a la carpeta de destino
-            $uploadedFile->moveTo('../../resources/notesFiles/' . $filename);
+         if (isset($_FILES['file'])) {
+            $archivo = $_FILES['file'];
+            $resultado = guardarArchivo($archivo,$data["id_note"]);
+            if ($resultado !== false) {
+                $data["nombre"] = $resultado["nombre"];
+                $data["type_file"] = $resultado["type_file"];
+                $data["src"] = $resultado["src"];
+                 // Invoke the Domain with inputs and retain the result
+                $noteFileId = $this->noteFileCreator->createNoteFile($data);
+        
+                // Build the HTTP response
+                return $this->renderer
+                    ->json($response, ['noteFile_id' => $noteFileId])
+                    ->withStatus(StatusCodeInterface::STATUS_CREATED);
 
-            // Construye la respuesta HTTP
-            return $this->renderer
-                ->json($response, ['message' => 'Archivo guardado correctamente'])
-                ->withStatus(StatusCodeInterface::STATUS_CREATED);
-        } else {
-            // En caso de error al subir el archivo
-            return $this->renderer
-                ->json($response, ['message' => 'Error al subir el archivo'], StatusCodeInterface::STATUS_BAD_REQUEST);
-        }
+            } else {
+                return $this->renderer
+                        ->json($response, ['message' => 'Error al subir el archivo'], StatusCodeInterface::STATUS_BAD_REQUEST);
+            }
+        }                
     }
 }

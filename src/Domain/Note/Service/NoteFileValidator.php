@@ -51,7 +51,7 @@ final class NoteFileValidator
                 'type_file' => $constraint->required(
                     [
                         $constraint->notBlank(),
-                        $constraint->length(1,20),
+                        $constraint->length(1,50),
                         $constraint->positive()
                     ]),
                 'src' => $constraint->required(
