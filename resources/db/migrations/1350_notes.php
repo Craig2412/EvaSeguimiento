@@ -8,7 +8,7 @@ final class Notes extends AbstractMigration
     public function change(): void{
         
         $notes = $this->table('notes');
-        $notes->addColumn('note', 'string', ['limit' => 100])
+        $notes->addColumn('note', 'string', ['limit' => 300])
                  ->addColumn('id_user', 'integer' , ['null' => false , 'signed' => false])
                  ->addColumn('id_task', 'integer' , ['null' => false , 'signed' => false])
                  ->addColumn('created', 'datetime')

@@ -46,7 +46,7 @@ final class NoteValidator
                 'note' => $constraint->required(
                     [
                         $constraint->notBlank(),
-                        $constraint->length(10,100),
+                        $constraint->length(1,100),
                     ]),
                 'id_user' => $constraint->required(
                     [

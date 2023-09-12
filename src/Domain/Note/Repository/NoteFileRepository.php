@@ -58,7 +58,7 @@ final class NoteFileRepository
 
     public function deleteNoteFileById(int $noteFileId): void
     {
-        $this->queryFactory->newDelete('noteFiles')
+        $this->queryFactory->newDelete('note_files')
             ->where(['id' => $noteFileId])
             ->execute();
     }

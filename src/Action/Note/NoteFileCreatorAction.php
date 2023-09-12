@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 function guardarArchivo($archivo) {
-    $rutaDestino = __DIR__.'./../../../resources/notesFiles/';
+    $rutaDestino = __DIR__.'/./../../../resources/notesFiles/';
     $nombreArchivo = uniqid() . '_' . $archivo['name'];
     $rutaCompleta = $rutaDestino . $nombreArchivo;
     $tipoArchivo = $_FILES['file']['type'];

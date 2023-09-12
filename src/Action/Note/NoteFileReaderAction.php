@@ -50,8 +50,7 @@ final class NoteFileReaderAction
             readfile($archivo);
             exit;
         } else {
-            return $this->renderer
-            ->json($response, ['message' => 'Error al descargar el archivo'], StatusCodeInterface::STATUS_BAD_REQUEST);
+            return ['message' => 'Error al descargar el archivo'];
         }
        
         return [
