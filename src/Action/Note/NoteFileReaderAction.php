@@ -54,14 +54,9 @@ final class NoteFileReaderAction
             ->json($response, ['message' => 'Error al descargar el archivo'], StatusCodeInterface::STATUS_BAD_REQUEST);
         }
        
-       
-       
-       
-       
-       
         return [
-           'id' => $noteFile->id,
-            'nombre' => $noteFile->nombre  ,
+            'id' => $noteFile->id,
+            'nombre' => $noteFile->nombre,
             'type_file' => $noteFile->type_file,
             'src' => $noteFile->src,
             'id_note' => $noteFile->id_note
