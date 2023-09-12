@@ -116,9 +116,13 @@ return function (App $app) {
         '/notes',
         function (RouteCollectorProxy $app) { 
             $app->get('/unique/{id_note}', \App\Action\Note\NoteReaderAction::class);//completed
+            $app->get('/file/{id_file}', \App\Action\Note\NoteFileReaderAction::class);//
+
             $app->get('/{id_task}/{nro_pag}/{cant_registros}', \App\Action\Note\NoteFinderAction::class);//completed
             $app->post('', \App\Action\Note\NoteCreatorAction::class);//completed
             $app->post('/file', \App\Action\Note\NoteFileCreatorAction::class);//completed
+            $app->post('/file/read', \App\Action\Note\NoteFileReadAction::class);//
+
             $app->put('/{note_id}', \App\Action\Note\NoteUpdaterAction::class);//completed
             $app->delete ('/{note_id}', \App\Action\Note\NoteDeleterAction::class);//completed
         }

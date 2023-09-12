@@ -8,7 +8,7 @@ final class RelationNoteFiles extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('note_files');
-        $table->addForeignKey(['id_note'],'users',['id'],['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION', 'constraint' => 'id_noteNotes'])
+        $table->addForeignKey(['id_note'],'notes',['id'],['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION', 'constraint' => 'id_noteNotes'])
               ->save();
     }
 }

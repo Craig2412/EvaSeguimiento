@@ -26,23 +26,18 @@ final class NoteFileRepository
     public function getNoteFileById(int $noteFileId): array
     {
         
-        $query = $this->queryFactory->newSelect('noteFiles');
+        $query = $this->queryFactory->newSelect('note_files');
         $query->select(
             [
-                'noteFiles.id',
-                'noteFiles.noteFile',
-                'noteFiles.id_user',
-                'users.name',
-                'noteFiles.id_task',
-                'tasks.title',
-                'noteFiles.created',
-                'noteFiles.updated'
+                'note_files.id',
+                'note_files.nombre',
+                'note_files.src',   
+                'note_files.type_file',
+                'note_files.id_note'
             ]
-        )  
-        ->leftjoin(['users'=>'users'], 'users.id = noteFiles.id_user')
-        ->leftjoin(['tasks'=>'tasks'], 'tasks.id = noteFiles.id_task');
+        );
 
-        $query->where(['noteFiles.id' => $noteFileId]);
+        $query->where(['note_files.id' => $noteFileId]);
 
         $row = $query->execute()->fetch('assoc');
 
