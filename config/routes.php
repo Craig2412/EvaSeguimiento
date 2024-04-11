@@ -13,8 +13,8 @@ return function (App $app) {
         return $response;
     });
 
-    //Auth
-    $app->group(
+     //Auth
+     $app->group(
         '/auth',
         function (RouteCollectorProxy $app) { 
             $app->post('/user/create', \App\Action\Auth\AuthSigninAction::class);
@@ -22,7 +22,7 @@ return function (App $app) {
         }
     );
  
-    //User 
+    //User
     $app->group(
         '/user',
         function (RouteCollectorProxy $app) { 
@@ -43,124 +43,67 @@ return function (App $app) {
         }
     );
 
-    // Area
-    $app->group(
-        '/areas',
-        function (RouteCollectorProxy $app) {
-           
-            $app->get('', \App\Action\Area\AreaFinderAction::class);//completed
-            $app->get('/{area_id}', \App\Action\Area\AreaReaderAction::class);//completed
-            $app->post('', \App\Action\Area\AreaCreatorAction::class);//completed
-            $app->put('/{area_id}', \App\Action\Area\AreaUpdaterAction::class);//completed
-            $app->delete('/{area_id}', \App\Action\Area\AreaDeleterAction::class);//completed
-        }
-    );
 
-    // Charge
-    $app->group(
-        '/charges',
-        function (RouteCollectorProxy $app) {
-            $app->get('', \App\Action\Charge\ChargeFinderAction::class);//completed
-            $app->get('/{charge_id}', \App\Action\Charge\ChargeReaderAction::class);//completed
-            $app->post('', \App\Action\Charge\ChargeCreatorAction::class);//completed
-            $app->put('/{charge_id}', \App\Action\Charge\ChargeUpdaterAction::class);//completed
-            $app->delete('/{charge_id}', \App\Action\Charge\ChargeDeleterAction::class);//completed
-        }
-    );
-
-    // Status
-    $app->group(
-        '/status',
-        function (RouteCollectorProxy $app) {
-            $app->get('', \App\Action\Status\StatusFinderAction::class);//completed
-            $app->get('/{status_id}', \App\Action\Status\StatusReaderAction::class);//completed
-            $app->post('', \App\Action\Status\StatusCreatorAction::class);//completed
-            $app->put('/{status_id}', \App\Action\Status\StatusUpdaterAction::class);//completed
-            $app->delete('/{status_id}', \App\Action\Status\StatusDeleterAction::class);//completed
-        }
-    );
-
-    // Type Tasks
-    $app->group(
-        '/type_tasks',
-        function (RouteCollectorProxy $app) {
-            $app->get('', \App\Action\TypeTask\TypeTaskFinderAction::class);//completed
-            $app->get('/{typeArea_id}', \App\Action\TypeTask\TypeTaskXAreaFinderAction::class);//completed
-            $app->post('', \App\Action\TypeTask\TypeTaskCreatorAction::class);//
-            $app->put('/{typeTask_id}', \App\Action\TypeTask\TypeTaskUpdaterAction::class);//
-            $app->delete('/{typeTask_id}', \App\Action\TypeTask\TypeTaskDeleterAction::class);//
-        }
-    );
-
-   //Tasks
-    $app->group(
-        '/tasks',
-        function (RouteCollectorProxy $app) { 
-            // Devuelve la cantidad de tasks por status segun el tipo de tarea o la direcciones de linea 
-            $app->get('/byStatus/{value}/{id_busqueda}', \App\Action\Task\TaskbyStatusFinderAction::class);//completed // ($value = 1 [para tipos de tarea] 2 [para busqueda por areas]) (id_busqueda = 1-20 [para tipos de tareas] 1-3 [para las areas])
-            $app->get('/byMonth/{year}', \App\Action\Task\TaskbyMonthFinderAction::class);//
-            $app->get('/byAreas', \App\Action\Task\TaskbyAreaFinderAction::class);//completed // Devuelve la cantidad de tasks por areas
-            $app->get('/byResponsablesAll', \App\Action\Task\TaskbyResponsableAllFinderAction::class);//completed
-            $app->get('/byResponsable/{id_responsable}', \App\Action\Task\TaskbyResponsableFinderAction::class);//completed
-            $app->get('/byCalendar/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Task\TaskCalendarFinderAction::class);//completed
-            $app->get('/{id_task}', \App\Action\Task\TaskReaderAction::class);//completed
-            $app->get('/{nro_pag}/{cant_registros}[/{params:.*}]', \App\Action\Task\TaskFinderAction::class);//completed
-            $app->post('', \App\Action\Task\TaskCreatorAction::class);//completed
-            $app->put('/{task_id}', \App\Action\Task\TaskUpdaterAction::class);//completed
-            $app->delete ('/{task_id}', \App\Action\Task\TaskDeleterAction::class);//completed
-        }
-    );
-
-   //Notes
-    $app->group(
-        '/notes',
-        function (RouteCollectorProxy $app) { 
-            $app->get('/unique/{id_note}', \App\Action\Note\NoteReaderAction::class);//completed
-            $app->get('/file/{id_file}', \App\Action\Note\NoteFileReaderAction::class);//completed
-            $app->get('/fileDelete/{id_file}', \App\Action\Note\NoteFileDeleteReaderAction::class);//
-            
-            $app->get('/fileforNote/{id_note}', \App\Action\Note\NoteFileFinderAction::class);//completed
-            $app->get('/{id_task}/{nro_pag}/{cant_registros}', \App\Action\Note\NoteFinderAction::class);//completed
-            $app->post('', \App\Action\Note\NoteCreatorAction::class);//completed
-            $app->post('/file', \App\Action\Note\NoteFileCreatorAction::class);//completed
-            $app->put('/{note_id}', \App\Action\Note\NoteUpdaterAction::class);//completed
-            $app->delete ('/{note_id}', \App\Action\Note\NoteDeleterAction::class);//completed
-        }
-    );
-
-     // Responsibles
+     // Estatus_aplicacion
      $app->group(
-        '/responsibles',
+        '/estatus_aplicacion',
         function (RouteCollectorProxy $app) {
-            $app->get('', \App\Action\Responsible\ResponsibleFinderAction::class);//completed
-            $app->get('/{responsible_id}', \App\Action\Responsible\ResponsibleReaderAction::class);//completed
-            $app->post('', \App\Action\Responsible\ResponsibleCreatorAction::class);//completed
-            $app->put('/{responsible_id}', \App\Action\Responsible\ResponsibleUpdaterAction::class);//completed
-            $app->delete('/{responsible_id}', \App\Action\Responsible\ResponsibleDeleterAction::class);//completed
-        }
-    );
-    
-     // Usuarios
-     $app->group(
-        '/usuarios',
-        function (RouteCollectorProxy $app) {
-            $app->get('', \App\Action\Usuario\UsuarioFinderAction::class);//completed
-            $app->get('/{usuario_id}', \App\Action\Usuario\UsuarioReaderAction::class);//completed
-            $app->post('', \App\Action\Usuario\UsuarioCreatorAction::class);//
-            $app->put('/{usuario_id}', \App\Action\Usuario\UsuarioUpdaterAction::class);//
-            $app->delete('/{usuario_id}', \App\Action\Usuario\UsuarioDeleterAction::class);//
+            $app->get('', \App\Action\Estatus_aplicacion\Estatus_aplicacionFinderAction::class);//completed
+            $app->get('/{estatus_aplicacion_id}', \App\Action\Estatus_aplicacion\Estatus_aplicacionReaderAction::class);//completed
+            $app->post('', \App\Action\Estatus_aplicacion\Estatus_aplicacionCreatorAction::class);//completed
+            $app->put('/{estatus_aplicacion_id}', \App\Action\Estatus_aplicacion\Estatus_aplicacionUpdaterAction::class);//completed
+            $app->delete('/{estatus_aplicacion_id}', \App\Action\Estatus_aplicacion\Estatus_aplicacionDeleterAction::class);//completed
         }
     );
 
-    // API
-    $app->group(
-        '/api',
+
+    // Estatus
+     $app->group(
+        '/estatus',
         function (RouteCollectorProxy $app) {
-            $app->get('/customers', \App\Action\Customer\CustomerFinderAction::class);//test
-            $app->get('/customers/{customer_id}', \App\Action\Customer\CustomerReaderAction::class);//test
-            $app->post('/customers', \App\Action\Customer\CustomerCreatorAction::class);//test
-            $app->put('/customers/{customer_id}', \App\Action\Customer\CustomerUpdaterAction::class);//test
-            $app->delete('/customers/{customer_id}', \App\Action\Customer\CustomerDeleterAction::class);//test
+            $app->get('', \App\Action\Estatus\EstatusFinderAction::class);//
+            $app->get('/{estatus_id}', \App\Action\Estatus\EstatusReaderAction::class);//
+            $app->post('', \App\Action\Estatus\EstatusCreatorAction::class);//
+            $app->put('/{estatus_id}', \App\Action\Estatus\EstatusUpdaterAction::class);//
+            $app->delete('/{estatus_id}', \App\Action\Estatus\EstatusDeleterAction::class);//
         }
     );
+
+    // Preguntas
+     $app->group(
+        '/preguntas',
+        function (RouteCollectorProxy $app) {
+            $app->get('', \App\Action\Preguntas\PreguntasFinderAction::class);//
+            $app->get('/{preguntas_id}', \App\Action\Preguntas\PreguntasReaderAction::class);//
+            $app->post('', \App\Action\Preguntas\PreguntasCreatorAction::class);//
+            $app->put('/{preguntas_id}', \App\Action\Preguntas\PreguntasUpdaterAction::class);//
+            $app->delete('/{preguntas_id}', \App\Action\Preguntas\PreguntasDeleterAction::class);//
+        }
+    );
+
+
+    // Funcionarios
+     $app->group(
+        '/funcionarios',
+        function (RouteCollectorProxy $app) {
+            $app->get('', \App\Action\Funcionarios\FuncionariosFinderAction::class);//
+            $app->get('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosReaderAction::class);//
+            $app->post('', \App\Action\Funcionarios\FuncionariosCreatorAction::class);//
+            $app->put('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosUpdaterAction::class);//
+            $app->delete('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosDeleterAction::class);//
+        }
+    );
+
+    // Encuesta
+    $app->group(
+        '/encuesta',
+        function (RouteCollectorProxy $app) {
+            $app->get('/byPresFunc/{preguntas_funcionarios}/{id}/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Encuesta\EncuestaFinderFiltroPresFuncpAction::class);//en la primera variable se elige bajo que metodo quieres buscar si por preguntas o por funcionarios (1-2) y en la segunda el id de la pregunta o del funcionario de lo cual quieres todo, las otras 3 son de un paginador cualquiera
+            $app->get('', \App\Action\Encuesta\EncuestaFinderAction::class);//
+            $app->post('', \App\Action\Encuesta\EncuestaCreatorAction::class);//
+            $app->put('/{encuesta_id}', \App\Action\Encuesta\EncuestaUpdaterAction::class);//
+            $app->delete('/{encuesta_id}', \App\Action\Encuesta\EncuestaDeleterAction::class);//
+        }
+    );
+
 };

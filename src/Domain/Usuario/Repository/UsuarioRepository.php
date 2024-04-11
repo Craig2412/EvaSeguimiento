@@ -11,7 +11,7 @@ final class UsuarioRepository
 
     public function __construct(QueryFactory $queryFactory)
     {
-        $this->fecha = date("Y-m-d H:i:s" , time() - 21600); // Aca esta la fecha del dia (UNIX) menos 5  horas por el uso horario de venezuela
+        $this->fecha = date("Y-m-d H:i:s" , time() - 18000); // Aca esta la fecha del dia (UNIX) menos 5  horas por el uso horario de venezuela
         $this->queryFactory = $queryFactory;
     }
     

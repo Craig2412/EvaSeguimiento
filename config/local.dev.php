@@ -14,7 +14,7 @@ return function (array $settings): array {
     // Database
     $settings['db']['host'] = 'localhost';
     $settings['db']['username'] = 'root';
-    $settings['db']['database'] = 'seguimiento';
+    $settings['db']['database'] = 'votaciones';
     $settings['db']['encoding'] = 'utf8';
 
     $_ENV['bcrypt']= 12;

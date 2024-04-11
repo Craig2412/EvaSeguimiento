@@ -2,54 +2,56 @@
 
 namespace App\Action\Customer;
 
-use App\Domain\Customer\Data\CustomerFinderResult;
-use App\Domain\Customer\Service\CustomerFinder;
+
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+require __DIR__ .'/../../../vendor/autoload.php';
 
 final class CustomerFinderAction
 {
-    private CustomerFinder $customerFinder;
-
+    private CustomerFinderAction $CustomerFinderAction;
+    
     private JsonRenderer $renderer;
-
-    public function __construct(CustomerFinder $customerFinder, JsonRenderer $jsonRenderer)
-    {
-        $this->customerFinder = $customerFinder;
-        $this->renderer = $jsonRenderer;
-    }
-
+    
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        // Optional: Pass parameters from the request to the service method
-        // ...
+       // ... your code here ...
 
-        $customers = $this->customerFinder->findCustomers();
+        // Create a new response object
+        $newResponse = new \Slim\Psr7\Response();
 
-        // Transform result and render to json
-        return $this->renderer->json($response, $this->transform($customers));
+        // Add some content to the response
+        $newResponse->getBody()->write('Hello, world!');
+
+        // Set the response status code and headers
+        $newResponse = $newResponse->withStatus(200)
+                                  ->withHeader('Content-Type', 'text/plain');
+
+        // Return the response object
+        return $newResponse;
+        
     }
-
-    public function transform(CustomerFinderResult $result): array
+    public function transform(StatusFinderResult $result): array
     {
-        $customers = [];
-
-        foreach ($result->customers as $customer) {
-            $customers[] = [
-                'id' => $customer->id,
-                'number' => $customer->number,
-                'name' => $customer->name,
-                'street' => $customer->street,
-                'postal_code' => $customer->postalCode,
-                'city' => $customer->city,
-                'country' => $customer->country,
-                'email' => $customer->email,
-            ];
-        }
-
-        return [
-            'customers' => $customers,
-        ];
+        var_dump('holi');
+        $client = new \Goutte\Client();
+    
+        $client
+            ->request('GET', 'https://www.imdb.com/search/name/?birth_monthday=12-10')
+            ->filter('div.lister-list h3 a')
+            ->each(function ($node) use ($client) {
+                $name = $node->text();
+        
+                $birthday = $client
+                    ->click($node->link())
+                    ->filter('#name-born-info > time')->first()
+                    ->attr('datetime');
+        
+                $year = (new DateTimeImmutable($birthday))->format('Y');
+        
+                return "{$name} nació en {$year}\n"  ;
+            });
+        
     }
 }

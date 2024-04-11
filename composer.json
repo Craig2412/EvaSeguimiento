@@ -17,6 +17,7 @@
         "cakephp/chronos": "^2",
         "cakephp/database": "^4",
         "cakephp/migrations": "@stable",
+        "fabpot/goutte": "^4.0",
         "fig/http-message-util": "^1.1",
         "hevertonfreitas/cakephp-audit-log": "^4.0",
         "monolog/monolog": "^3",
@@ -25,7 +26,7 @@
         "php-di/php-di": "^6 || ^7",
         "robmorgan/phinx": "^0.13.4",
         "selective/basepath": "^2",
-        "slim/slim": "^4",
+        "slim/slim": "4.*",
         "symfony/uid": "^6",
         "symfony/validator": "^6",
         "tuupola/slim-jwt-auth": "^3.7"
