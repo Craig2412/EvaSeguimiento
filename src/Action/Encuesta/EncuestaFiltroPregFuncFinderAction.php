@@ -24,7 +24,7 @@ final class EncuestaFiltroPregFuncFinderAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        
+
     //Paginador
         if (isset($args['nro_pag']) && ($args['nro_pag'] > 0)) {
             $nro_pag = (int)$args['nro_pag'];
@@ -38,13 +38,10 @@ final class EncuestaFiltroPregFuncFinderAction
             $cant_registros = 10;
         }
 
-        $fecha_inicial = $args['fecha_inicial'];
-        $fecha_final = $args['fecha_final'];
+        $pregFunc = $args['preguntas_funcionarios'];//Preguntas o funcionarios (1 - 2)
+        $encuestaId = $args['id'];//ID de lo que buscamos
 
-        $tipo_consulta = $args['preguntas_funcionarios'];//Preguntas o funcionarios (1 - 2)
-        $tipo_consulta = $args['id'];//ID de lo que buscamos
-
-        $EncuestaFiltroPregFuncs = $this->EncuestaFiltroPregFuncsFinder->findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$fecha_inicial,$fecha_final);
+        $EncuestaFiltroPregFuncs = $this->EncuestaFiltroPregFuncsFinder->findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$encuestaId,$pregFunc);
     //Fin Paginador
 
         // Transform result and render to json
@@ -55,14 +52,15 @@ final class EncuestaFiltroPregFuncFinderAction
     {
         $EncuestaFiltroPregFuncs = [];
 
-        foreach ($result->EncuestaFiltroPregFunc as $EncuestaFiltroPregFunc) {
+
+        foreach ($result->encuestaFiltroPregFunc as $EncuestaFiltroPregFunc) {
             $EncuestaFiltroPregFuncs[] = [
-                'id' => $encuesta->id,
-                'id_funcionario' => $encuesta->id_funcionario,
-                'funcionario' => $encuesta->funcionario,
-                'id_pregunta' => $encuesta->id_pregunta,
-                'pregunta' => $encuesta->pregunta,
-                'respuesta' => $encuesta->respuesta
+                'id' => $EncuestaFiltroPregFunc->id,
+                'id_funcionario' => $EncuestaFiltroPregFunc->id_funcionario,
+                'funcionario' => $EncuestaFiltroPregFunc->funcionario,
+                'id_pregunta' => $EncuestaFiltroPregFunc->id_pregunta,
+                'pregunta' => $EncuestaFiltroPregFunc->pregunta,
+                'respuesta' => $EncuestaFiltroPregFunc->respuesta
             ];
         }
 
@@ -71,10 +69,3 @@ final class EncuestaFiltroPregFuncFinderAction
         ];
     }
 }
-/*
-
-
-EJEMPLO DEL STRING QUE SE DEBE ENVIAR POR LOS PARAMETROS CON FORMATO JSON:
-    {"area": "some_value", "status": "some_name", "type_EncuestaFiltroPregFuncs": "some_surname"}
- 
-*/

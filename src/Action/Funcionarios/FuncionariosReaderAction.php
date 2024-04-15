@@ -26,7 +26,7 @@ final class FuncionariosReaderAction
         array $args
     ): ResponseInterface {
         // Fetch parameters from the request
-        $funcionariosId = (int)$args['funcionarios_id'];
+        $funcionariosId = (int)$args['funcionarios_cedula'];
 
         // Invoke the domain and get the result
         $funcionarios = $this->funcionariosReader->getFuncionarios($funcionariosId);

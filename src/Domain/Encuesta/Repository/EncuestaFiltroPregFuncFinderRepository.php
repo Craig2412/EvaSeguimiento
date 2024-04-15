@@ -13,12 +13,12 @@ final class EncuestaFiltroPregFuncFinderRepository
         $this->queryFactory = $queryFactory;
     }
 
-    public function findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$fecha_inicial,$fecha_final): array
+    public function findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$encuestaId,$pregFunc): array
     {
         //Paginador
         $limit = $cant_registros;
         $offset = ($nro_pag - 1) * $limit;
-        $query = $this->queryFactory->newSelect('encuestas');
+        $query = $this->queryFactory->newSelect('encuesta');
         //Fin Paginador
         
         $query->select(
@@ -33,11 +33,8 @@ final class EncuestaFiltroPregFuncFinderRepository
 
             ->leftjoin(['funcionarios'=>'funcionarios'], 'funcionarios.id = encuesta.id_funcionario')
             ->leftjoin(['preguntas'=>'preguntas'], 'preguntas.id = encuesta.id_pregunta');
-            if ($pregFuncp == 1) {
-                $query  ->where(['id_pregunta' => $encuestaId])
-                        ->where(function ($exp, $q) use ($fecha_inicial, $fecha_final) {
-                            return $exp->between('encuestas.estimated_date', $fecha_inicial, $fecha_final);
-                        }, []);
+            if ($pregFunc == 1) {
+                $query  ->where(['id_pregunta' => $encuestaId]);
             }else {
                 $query->where(['id_funcionario' => $encuestaId]);
             }

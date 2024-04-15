@@ -87,7 +87,7 @@ return function (App $app) {
         '/funcionarios',
         function (RouteCollectorProxy $app) {
             $app->get('', \App\Action\Funcionarios\FuncionariosFinderAction::class);//
-            $app->get('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosReaderAction::class);//
+            $app->get('/{funcionarios_cedula}', \App\Action\Funcionarios\FuncionariosReaderAction::class);//
             $app->post('', \App\Action\Funcionarios\FuncionariosCreatorAction::class);//
             $app->put('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosUpdaterAction::class);//
             $app->delete('/{funcionarios_id}', \App\Action\Funcionarios\FuncionariosDeleterAction::class);//
@@ -98,7 +98,7 @@ return function (App $app) {
     $app->group(
         '/encuesta',
         function (RouteCollectorProxy $app) {
-            $app->get('/byPresFunc/{preguntas_funcionarios}/{id}/{nro_pag}/{cant_registros}/{fecha_inicial}/{fecha_final}', \App\Action\Encuesta\EncuestaFinderFiltroPresFuncpAction::class);//en la primera variable se elige bajo que metodo quieres buscar si por preguntas o por funcionarios (1-2) y en la segunda el id de la pregunta o del funcionario de lo cual quieres todo, las otras 3 son de un paginador cualquiera
+            $app->get('/byPresFunc/{preguntas_funcionarios}/{id}/{nro_pag}/{cant_registros}', \App\Action\Encuesta\EncuestaFiltroPregFuncFinderAction::class);//en la primera variable se elige bajo que metodo quieres buscar si por preguntas o por funcionarios (1-2) y en la segunda el id de la pregunta o del funcionario de lo cual quieres todo, las otras 3 son de un paginador cualquiera
             $app->get('', \App\Action\Encuesta\EncuestaFinderAction::class);//
             $app->post('', \App\Action\Encuesta\EncuestaCreatorAction::class);//
             $app->put('/{encuesta_id}', \App\Action\Encuesta\EncuestaUpdaterAction::class);//

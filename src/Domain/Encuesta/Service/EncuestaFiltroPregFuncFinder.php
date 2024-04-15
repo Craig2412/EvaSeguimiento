@@ -15,10 +15,10 @@ final class EncuestaFiltroPregFuncFinder
         $this->repository = $repository;
     }
 
-    public function findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$fecha_inicial,$fecha_final): EncuestaFinderResult
+    public function findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$encuestaId,$pregFunc): EncuestaFinderResult
     {
         // Input validation
-        $encuestaFiltroPregFunc = $this->repository->findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$fecha_inicial,$fecha_final);
+        $encuestaFiltroPregFunc = $this->repository->findEncuestaFiltroPregFunc($nro_pag,$cant_registros,$encuestaId,$pregFunc);
         
         return $this->createResult($encuestaFiltroPregFunc);
     }

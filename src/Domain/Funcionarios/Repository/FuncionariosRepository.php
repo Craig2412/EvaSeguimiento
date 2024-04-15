@@ -45,7 +45,7 @@ final class FuncionariosRepository
             ]
         )->leftjoin(['estatus'=>'estatus'], 'estatus.id = funcionarios.id_estatus');
             
-            $query->where(['funcionarios.id' => $funcionariosId]);
+            $query->where(['funcionarios.cedula' => $funcionariosId]);
             
             $row = $query->execute()->fetch('assoc');
             
